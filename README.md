@@ -11,6 +11,54 @@ Project requires GBDK-2020 v4.1.1: http://gbdk-2020.github.io and GNU make. A fe
 4. wav2data.py is used to convert 8KHz mono PCM WAV files
 5. fxhammer2data.py is used to convert FXHammer https://www.pouet.net/prod.php?which=17337 (native game boy tool) sound effects in SAV format which is produced by almost any game boy emulator and is simply a SRAM dump
 
+# Integration into GBDK
+
+Please follow these steps to add VGM2GBSFX into a GBDK project:
+
+## Initialization
+
+1. If you haven't already, set up hUGEDriver according to the [quick start guide](https://github.com/SuperDisk/hUGEDriver?tab=readme-ov-file#quick-start-gbdk).
+1. Copy musicmanager.h, musicmanager.c, sfxmanager.h, and sfxmanager.c from this project into your codebase.
+1. `#include` the .h files from the appropriate place in your project.
+1. Use `set_interrupts()` to enable `IE_REG` and `TIM_IFLAG`.
+1. At the start of your game, add the following:
+  ```
+    music_init();
+
+    CRITICAL {
+      music_setup_timer();
+      add_low_priority_TIM(music_play_isr);
+    }
+  ```
+
+## Playing Music
+
+First, include the compiled .h file of your song.  The .h file will include a const and a bank; import them using something like this:
+
+```
+extern const hUGESong_t songname;
+BANKREF_EXTERN(songname)
+```
+
+Then, play the song using this code.  This must be run from bank 0 to prevent crashes.
+```
+music_load(BANK(songname), &songname);
+```
+
+## Playing Sound Effects
+
+Import the .h file exported from your sound effect file.  Then play the sound effect using this:
+```
+music_play_sfx(
+  BANK(sfx_id),
+  sfx_id,
+  SFX_MUTE_MASK(sfx_id),
+  priority_number, // a priority number; higher priority sound effects interrupt lower priority sound effects
+);
+```
+
+Replace `00` with the index of the sound effect to play.
+
 # Data format description:
 
 `ROW: [COUNT][[[COMMAND][[REG]...]]...]`
