@@ -57,8 +57,6 @@ music_play_sfx(
 );
 ```
 
-Replace `00` with the index of the sound effect to play.
-
 # Data format description:
 
 `ROW: [COUNT][[[COMMAND][[REG]...]]...]`
