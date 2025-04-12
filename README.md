@@ -16,6 +16,7 @@ VGM2GBSFX supports the following music and sound formats.  Each format has a too
 * **.gbs module dumps** - convert to .vgm using `utils/dump2vgm.py`, then use `utils/vgm2data.py`.
 * **.wav sound effects** - use `utils/wav2data.py`.  Only 8KHz mono PCM WAV files are supported.
 * **.sav file from FXHammer** - use `utils/fxhammer2data.py`.  FXHammer is a sound effect editor available at https://www.pouet.net/prod.php?which=17337 and can be run in almost any Game Boy emulator; the .sav file is the output of its SRAM save file.
+  * To play sound effects at the same speed as they are within FXHammer, add the `-d 4` parameter to `fxhammer2data`.
 
 # Integration into GBDK
 
