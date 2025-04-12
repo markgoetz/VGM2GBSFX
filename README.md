@@ -3,7 +3,7 @@ Convert DMG VGM files (and a few other formats) for using them as SFX in homebre
 
 ![example rom](/screenshot.png)
 
-Project requires GBDK-2020 v4.1.1: http://gbdk-2020.github.io and GNU make. A few tools are compiled into executables for windows, but you may get the linux versions (or whatever else targets) from the original repositories. Main data conversion tools are written in python.
+This project requires GBDK-2020 v4.1.1: http://gbdk-2020.github.io and GNU make. A few tools are compiled into executables for windows, but you may get the linux versions (or whatever else targets) from the original repositories. The main data conversion tools are written in python.
 
 # Importing your music and sound effects
 
@@ -24,8 +24,8 @@ Please follow these steps to add VGM2GBSFX into a GBDK project:
 ## Initialization
 
 1. If you haven't already, set up hUGEDriver according to the [quick start guide](https://github.com/SuperDisk/hUGEDriver?tab=readme-ov-file#quick-start-gbdk).
-1. Copy musicmanager.c and sfxmanager.c from the src/sm83 folder of this project into your codebase.
-1. Copy musicmanager.h and sfxmanager.h from the include folder of this project into your codebase.
+1. Copy musicmanager.c and sfxplayer.c from the src/sm83 folder of this project into your codebase.
+1. Copy musicmanager.h and sfxplayer.h from the include folder of this project into your codebase.
 1. At the start of your game, add the following:
   ```
     #include "musicmanager.h"
